@@ -10,7 +10,7 @@ from flask import Flask, abort, flash, g, redirect, render_template, request, se
 
 
 BASE_DIR = Path(__file__).resolve().parent
-INSTANCE_DIR = BASE_DIR / "instance"
+INSTANCE_DIR = (Path("/tmp").resolve() if os.environ.get("VERCEL") == "1" else BASE_DIR / "instance")
 INSTANCE_DIR.mkdir(exist_ok=True)
 
 app = Flask(__name__, instance_path=str(INSTANCE_DIR))
